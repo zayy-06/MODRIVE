@@ -15,7 +15,7 @@ A premium automotive modification e-commerce and realistic 3D car customization 
 | Styling | Tailwind CSS v3 (custom design tokens) |
 | Routing | React Router v6 |
 | Backend | Node.js + Express 4 |
-| Database | MongoDB (planned — Phase 4) |
+| Database | MongoDB (planned) |
 | Icons | Material Symbols Outlined (Google Fonts CDN) |
 | Fonts | Geist (body), Syne (headings) via Google Fonts |
 | Security | Helmet, CORS allowlist, body-size limit |
