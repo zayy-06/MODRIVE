@@ -195,14 +195,15 @@ See [`.env.example`](.env.example) for all variables. Copy it to `.env` and fill
 
 ### Frontend Routes
 
-| Route | Status | Component |
-|---|---|---|
-| `/` | ✅ **Implemented** | `HomePage` — full 7-section reference |
-| `/shop` | ✅ **Implemented** | `ShopPage` — full catalog workspace |
-| `/services` | ✅ **Implemented** | `ServicesPage` — full workshop & disciplines workspace |
-| `/customizer` | ⏳ Phase 4 | `CustomizerPlaceholder` |
-| `/gallery` | ⏳ Future | `ShopPlaceholder` |
-| `*` | ✅ 404 handled | `ShopPlaceholder` (not found) |
+| Route | Status | Component | Description |
+|---|---|---|---|
+| `/` | ✅ **Implemented** | `HomePage` | Full 7-section flagship studio landing |
+| `/shop` | ✅ **Implemented** | `ShopPage` | Full catalog workspace with vehicle fitment filters |
+| `/services` | ✅ **Implemented** | `ServicesPage` | 6 disciplines matrix & consultation booking |
+| `/gallery` | ✅ **Implemented** | `GalleryPage` | Registry builds, telemetry pillars & BOM specs |
+| `/customizer` | ✅ **Implemented** | `StudioPage` | 3D Studio configurator & live build sheet |
+| `/about` | ✅ **Implemented** | `AboutPage` | Cinematic hero, ethos, workshop & brand values |
+| `*` | ✅ 404 handled | `ShopPlaceholder` | Catch-all page not found |
 
 ### Backend API Routes
 
@@ -215,7 +216,7 @@ See [`.env.example`](.env.example) for all variables. Copy it to `.env` and fill
 ## What Is Complete
 
 ### Phase 1: Foundation + Home Page
-- [x] React + Vite client structure
+- [x] React + Vite client structure & Tailwind CSS design system
 - [x] Express server with Helmet + CORS + body limits
 - [x] `GET /api/health` endpoint
 - [x] Full Home page matching reference (7 sections)
@@ -257,59 +258,86 @@ See [`.env.example`](.env.example) for all variables. Copy it to `.env` and fill
 - [x] Active route indicator and pulsing dot on Services nav link
 - [x] Synchronized breadcrumb and footer navigation links
 
-## What Is NOT Implemented (Future Phases)
+### Phase 4: Build Gallery Frontend
+- [x] Complete Build Gallery page matching `gallery-reference.html`:
+  - [x] Breadcrumb bar and intro header with registry archive stats
+  - [x] Sticky Category Filter bar with live build counts, search, and sorting
+  - [x] Flagship Featured Build hero (Porsche 911 GT3 RS) with 4 telemetry pillars and package totals
+  - [x] 3-Column responsive Build Card Grid with active sheet badge, spec strips, and dynamic selection
+  - [x] Interactive Bill of Materials (BOM) breakdown tabs with line-item pricing and specs
+  - [x] Parts breakdown export and wishlist interaction with feedback toasts
+  - [x] Dual 3D Studio & Shop catalogue CTA section
+  - [x] Client-side search, category filter, sorting, and pagination
 
-| Feature | Phase |
-|---|---|
-| Persistent Cart & Checkout flow | 3 |
-| Authentication / JWT & User Accounts | 3 |
-| MongoDB models & real Product REST API | 3 |
-| Build Gallery & Workshop Scheduling | 3 |
-| Real-time WebGL 3D Studio Configurator | 4 |
-| Payment Gateway Integration | 4+ |
-| Admin Inventory Management | Future |
+### Phase 5: 3D Studio Configurator Frontend
+- [x] Complete 3D Studio customizer workspace matching `studio-reference.html`:
+  - [x] Studio intro header with breadcrumb and demo status badges
+  - [x] 3-Column configurator layout (responsive mobile/desktop):
+    - [x] Left sidebar: Vehicle selection with category filter tabs and search
+    - [x] Center viewport: 5 view-angle controls, zoom (+/-), lighting presets, and interactive hotspots
+    - [x] Right sidebar: Customizer panel with paint swatches (5), finishes (3), wheels (3), ride height (3), aero (3), and performance checkboxes (4)
+  - [x] Non-sticky Build Summary bar with live illustrative PKR total calculation, active mod count, and reset
+  - [x] Itemized Build Sheet Modal with line-by-line pricing and breakdown
+  - [x] Studio-matched Recommended Parts section (4 cards) linking to `/shop`
+  - [x] Closing consultation CTA linking to `/services` and `/shop`
+  - [x] Session-only save toast notification (client-side demo)
 
-> **Security note:** This is an initial frontend baseline. Server-side authorization, pricing validation, and database security will be implemented in Phase 3. Never trust client-supplied prices or user roles.
+### Phase 6: About Us Page Frontend
+- [x] Complete About Us page matching `about-reference.html`:
+  - [x] Cinematic hero section with full-bleed backdrop, scrim gradients, and Services & Gallery CTAs
+  - [x] Ethos & Code: 3 core technical principles (Precision First, Purpose-Built Performance, Personal Expression)
+  - [x] Workshop Experience: split-screen narrative with 3 quality-focused points, workshop lab visual, and overlapping macro dry-carbon detail image
+  - [x] Execution Protocol: 4-step build timeline (Discover, Design, Build, Refine) with phase codes
+  - [x] Portfolio Archetypes: 3-column bento showcase (Street Performance, Track-Focused, Individual Expression)
+  - [x] Foundational Pillars: 4 brand tenets (Attention to Detail, Thoughtful Engineering, Individual Design, Quality Over Shortcuts)
+  - [x] Closing CTA: "YOUR VISION. YOUR BUILD." with direct 3D Studio and Shop navigation
+  - [x] Neutral portfolio showcase wording without unverified telemetry claims
+
+---
+
+## What Is NOT Implemented (Future Roadmap)
+
+| Feature | Description | Planned Stage |
+|---|---|---|
+| Persistent Cart & Checkout flow | Full ecommerce cart persistence, coupon codes & order review | Backend Phase |
+| Authentication & User Accounts | JWT / OAuth registration, login, user garage & saved builds | Backend Phase |
+| MongoDB Models & REST API | Mongoose schemas for Products, Builds, Orders, and Services | Backend Phase |
+| Real-time WebGL 3D Engine | Three.js / WebGL 3D model viewport simulation | Future 3D Phase |
+| Payment Gateway Integration | Stripe / local gateway payment processing | Production Phase |
+| Admin Management Dashboard | Inventory management, price adjustments & booking admin | Production Phase |
+
+> **Security note:** All current frontend prices and specifications are illustrative demo data for portfolio demonstration purposes. Server-side validation and database security will be implemented in the backend phase.
 
 ---
 
 ## Verification Results
 
-Commands actually run and results (2026-10-14):
+Latest verification results:
 
 ```
 Backend:
-  npm install
-    → ✅ 72 packages added, 0 vulnerabilities
-
   node server.js + GET /api/health
     → ✅ STATUS: 200
     → ✅ BODY: {"status":"ok","service":"modrive-api","phase":1,
-               "environment":"development","timestamp":"2026-10-14T..."}
+               "environment":"development"}
 
 Client:
-  npm install
-    → ✅ 330 packages added
-
-  npm run build (Vite v5.4.21 - Phase 2)
-    → ✅ 65 modules transformed, built in 25.54s, 0 errors
-    → dist/index.html                  1.50 kB │ gzip:  0.82 kB
-    → dist/assets/index-B0c5gEWX.css  34.27 kB │ gzip:  6.48 kB
-    → dist/assets/index-BpPeHSai.js  282.53 kB │ gzip: 80.43 kB
+  npm run build (Vite v5.4.21 - Phase 6)
+    → ✅ 101 modules transformed, 0 errors
+    → dist/index.html                  1.50 kB │ gzip:   0.82 kB
+    → dist/assets/index-AGOa6ppK.css  57.27 kB │ gzip:   9.39 kB
+    → dist/assets/index-DAp--8Wm.js  474.54 kB │ gzip: 122.35 kB
 ```
 
-> See [docs/CHANGELOG.md](docs/CHANGELOG.md) for a full record of this phase.
-
 ---
 
-## Next Recommended Task — Phase 3: Backend API & MongoDB
+## Next Recommended Task — Backend API & Database
 
-- MongoDB connection & Mongoose schemas (Products, Users, Orders, Builds)
-- Server-side REST endpoints: `GET /api/products` (filtering, sorting, pagination)
+- MongoDB connection & Mongoose schemas (Products, Users, Orders, Builds, Bookings)
+- Server-side REST endpoints: `GET /api/products`, `GET /api/builds`, `POST /api/consultations`
 - User authentication & JWT authorization
-- Persistent cart state & sync
-- Build gallery & workshop services data endpoints
+- Persistent cart state & user profile sync
 
 ---
 
-*MODRIVE Performance Studio — All prices are illustrative demo prices in PKR for portfolio showcase purposes.*
+*MODRIVE Performance Studio — All prices and specs are illustrative demo data in PKR for portfolio showcase purposes.*
